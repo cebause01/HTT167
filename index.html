@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Waterpark Wonderland Melaka - E-Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -28,10 +29,37 @@
             background-color: var(--primary);
             color: white;
             overflow-x: hidden;
+            line-height: 1.7;
+            letter-spacing: -0.01em;
         }
         
         .smooth-scroll {
             scroll-behavior: smooth;
+        }
+        
+        /* Typography improvements */
+        h1, h2, h3, h4, h5, h6 {
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            font-weight: 400;
+        }
+        
+        p {
+            line-height: 1.75;
+            letter-spacing: -0.01em;
+        }
+        
+        /* Improved spacing */
+        section {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+        }
+        
+        @media (max-width: 768px) {
+            section {
+                padding-top: 4rem;
+                padding-bottom: 4rem;
+            }
         }
         
         /* Floating orbs background */
@@ -86,6 +114,29 @@
             background: rgba(30, 41, 59, 0.5);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Micro-interactions for cards */
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(30, 41, 59, 0.7);
+        }
+        
+        /* Interactive elements with better touch targets */
+        button, a, [role="button"] {
+            min-height: 44px;
+            min-width: 44px;
+            touch-action: manipulation;
+        }
+        
+        @media (max-width: 768px) {
+            button, a, [role="button"] {
+                min-height: 48px;
+                min-width: 48px;
+            }
         }
         
         .section-number {
@@ -126,6 +177,8 @@
         .member-card {
             position: relative;
             overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
         }
         
         .member-card::before {
@@ -135,13 +188,24 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.15));
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: inherit;
+        }
+        
+        .member-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(139, 92, 246, 0.3);
         }
         
         .member-card:hover::before {
             opacity: 1;
+        }
+        
+        .member-card:active {
+            transform: translateY(-2px) scale(1);
+            transition: all 0.1s;
         }
         
         .gradient-text {
@@ -151,26 +215,202 @@
             background-clip: text;
         }
         
+        /* Enhanced buttons with micro-interactions */
         .btn-primary {
             background: linear-gradient(135deg, var(--accent), var(--accent-pink));
             border: none;
-            transition: transform 0.3s, box-shadow 0.3s;
+            min-height: 44px;
+            min-width: 44px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
         }
         
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.5);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(-1px) scale(0.98);
+            transition: all 0.1s;
         }
         
         .btn-secondary {
             border: 2px solid white;
             background: transparent;
-            transition: background 0.3s, color 0.3s;
+            min-height: 44px;
+            min-width: 44px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s, height 0.4s;
+            z-index: -1;
+        }
+        
+        .btn-secondary:hover::before {
+            width: 300px;
+            height: 300px;
         }
         
         .btn-secondary:hover {
             background: white;
             color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-secondary:active {
+            transform: translateY(0) scale(0.98);
+            transition: all 0.1s;
+        }
+        
+        /* Scroll animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.8s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+        }
+        
+        /* Parallax effects */
+        .parallax-section {
+            transform: translateZ(0);
+            will-change: transform;
+        }
+        
+        /* Back to top button */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-pink));
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+        }
+        
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        #back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.7);
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent));
+        }
+        
+        #back-to-top:active {
+            transform: translateY(-2px) scale(1.05);
+            transition: all 0.1s;
+        }
+        
+        /* Progress bar */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent), var(--accent-blue));
+            background-size: 200% 100%;
+            animation: gradient-shift 3s ease infinite;
+            z-index: 9999;
+            transition: width 0.1s ease;
+            box-shadow: 0 2px 10px rgba(139, 92, 246, 0.5);
+        }
+        
+        @keyframes gradient-shift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+        
+        /* Enhanced table row interactions */
+        table tbody tr {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        table tbody tr:hover {
+            transform: translateX(4px);
+            background-color: rgba(255, 255, 255, 0.08) !important;
+        }
+        
+        /* Improved spacing for interactive elements */
+        .nav-link {
+            padding: 0.5rem 0.75rem;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        /* Better mobile touch targets */
+        @media (max-width: 768px) {
+            .nav-link {
+                min-height: 48px;
+                padding: 0.75rem 1rem;
+            }
+            
+            .btn-primary, .btn-secondary {
+                min-height: 48px;
+                padding: 0.875rem 2rem;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -179,6 +419,9 @@
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
+    
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
     
     <div class="content-wrapper">
         <!-- Navigation -->
@@ -218,7 +461,7 @@
         </nav>
 
         <!-- Hero Section -->
-        <section id="home" class="min-h-screen flex items-center justify-center px-6 pt-20">
+        <section id="home" class="min-h-screen flex items-center justify-center px-6 pt-20 parallax-section">
             <div class="container mx-auto max-w-5xl text-center">
                 <p class="section-number mb-4">Tourism Competitiveness Analysis</p>
                 <h1 class="text-6xl md:text-7xl font-light tracking-tight mb-6 leading-tight">
@@ -240,7 +483,7 @@
         </section>
 
         <!-- Group Details Section -->
-        <section id="group" class="py-24 px-6">
+        <section id="group" class="py-24 px-6 fade-in-up">
             <div class="container mx-auto max-w-6xl">
                 <p class="section-number text-center mb-2">01</p>
                 <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Group Details</h2>
@@ -295,7 +538,7 @@
         </section>
 
         <!-- Overview Section -->
-        <section id="overview" class="py-24 px-6">
+        <section id="overview" class="px-6 fade-in-up">
             <div class="container mx-auto max-w-6xl">
                 <p class="section-number text-center mb-2">02</p>
                 <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Attraction Overview</h2>
@@ -304,12 +547,19 @@
                 <div class="grid md:grid-cols-2 gap-8 mb-12">
                     <div class="glass-card rounded-xl p-8 border border-white/10">
                         <h3 class="text-xl font-medium mb-4">Location</h3>
-                        <p class="text-gray-400 leading-relaxed text-sm">
+                        <p class="text-gray-400 leading-relaxed text-sm mb-4">
                             Waterpark Wonderland Melaka is located in the historic city of Melaka, Malaysia. 
                             Situated in a prime location accessible from major highways, the waterpark offers 
                             easy access for both local and international visitors. The strategic location 
                             combines the charm of historical Melaka with modern entertainment facilities.
                         </p>
+                        <a href="https://www.melakawonderland.com.my/bm/" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="inline-flex items-center text-xs text-cyan-400 hover:text-cyan-300 transition-colors">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            Visit Official Website
+                        </a>
                     </div>
                     <div class="glass-card rounded-xl p-8 border border-white/10">
                         <h3 class="text-xl font-medium mb-4">History</h3>
@@ -375,7 +625,7 @@
         </section>
 
         <!-- Site Visit Plan Section -->
-        <section id="visit" class="py-24 px-6">
+        <section id="visit" class="px-6 fade-in-up">
             <div class="container mx-auto max-w-6xl">
                 <p class="section-number text-center mb-2">03</p>
                 <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Site Visit Plan</h2>
@@ -450,7 +700,7 @@
         </section>
 
         <!-- Media Section -->
-        <section id="media" class="py-24 px-6">
+        <section id="media" class="px-6 fade-in-up">
             <div class="container mx-auto max-w-6xl">
                 <p class="section-number text-center mb-2">04</p>
                 <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Visual & Multimedia Materials</h2>
@@ -571,38 +821,46 @@
         </section>
 
         <!-- Competitiveness Score Section -->
-        <section id="score" class="py-24 px-6">
+        <section id="score" class="px-6 fade-in-up">
             <div class="container mx-auto max-w-6xl">
                 <p class="section-number text-center mb-2">05</p>
                 <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Competitiveness Score</h2>
                 <div class="section-divider"></div>
                 
-                <div class="glass-card border border-white/10 p-12 mb-8 text-center rounded-xl">
+                <div class="glass-card border border-white/10 p-12 mb-8 text-center rounded-xl fade-in">
                     <p class="text-sm text-gray-400 mb-4 uppercase tracking-wider">Overall Score</p>
                     <p class="text-7xl font-light mb-2 gradient-text">85<span class="text-4xl">%</span></p>
                     <p class="text-sm text-gray-400">Competitiveness Rating</p>
                 </div>
 
-                <div class="glass-card border border-white/10 rounded-xl overflow-hidden">
+                <!-- Chart Visualization -->
+                <div class="glass-card border border-white/10 rounded-xl p-8 mb-8 fade-in-up">
+                    <h3 class="text-xl font-medium mb-6 text-center">Score Visualization</h3>
+                    <div class="max-w-2xl mx-auto">
+                        <canvas id="scoreChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="glass-card border border-white/10 rounded-xl overflow-hidden fade-in-up">
                     <div class="p-8 border-b border-white/10">
                         <h3 class="text-xl font-medium">Analysis Sheet Scores</h3>
                     </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full">
+                    <div class="w-full">
+                        <table class="w-full table-auto">
                             <thead>
                                 <tr class="border-b border-white/10">
-                                    <th class="px-8 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Indicator</th>
-                                    <th class="px-8 py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider">Score</th>
-                                    <th class="px-8 py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider">Max Score</th>
-                                    <th class="px-8 py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider">Percentage</th>
+                                    <th class="px-4 md:px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Indicator</th>
+                                    <th class="px-4 md:px-6 py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider">Score</th>
+                                    <th class="px-4 md:px-6 py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider">Max Score</th>
+                                    <th class="px-4 md:px-6 py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider">Percentage</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-white/10">
                                 <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-8 py-4 text-sm">Accessibility</td>
-                                    <td class="px-8 py-4 text-center text-sm font-medium">8</td>
-                                    <td class="px-8 py-4 text-center text-sm text-gray-400">10</td>
-                                    <td class="px-8 py-4 text-center">
+                                    <td class="px-4 md:px-6 py-4 text-sm">Accessibility</td>
+                                    <td class="px-4 md:px-6 py-4 text-center text-sm font-medium">8</td>
+                                    <td class="px-4 md:px-6 py-4 text-center text-sm text-gray-400">10</td>
+                                    <td class="px-4 md:px-6 py-4 text-center">
                                         <span class="inline-block px-3 py-1 text-xs font-medium bg-purple-500/20 text-purple-300 rounded-full">80%</span>
                                     </td>
                                 </tr>
@@ -662,7 +920,7 @@
         </section>
 
         <!-- Competitiveness Analysis Summary -->
-        <section id="analysis" class="py-24 px-6">
+        <section id="analysis" class="px-6 fade-in-up">
             <div class="container mx-auto max-w-4xl">
                 <p class="section-number text-center mb-2">06</p>
                 <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Competitiveness Analysis Summary</h2>
@@ -742,7 +1000,7 @@
         </section>
 
         <!-- Recommendations Section -->
-        <section id="recommendations" class="py-24 px-6">
+        <section id="recommendations" class="px-6 fade-in-up">
             <div class="container mx-auto max-w-6xl">
                 <p class="section-number text-center mb-2">07</p>
                 <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Recommendations for Improvement</h2>
@@ -921,11 +1179,23 @@
         <!-- Footer -->
         <footer class="border-t border-white/10 py-12 px-6">
             <div class="container mx-auto text-center">
-                <p class="text-sm text-gray-400 mb-2">&copy; 2024 Waterpark Wonderland Melaka E-Portfolio</p>
-                <p class="text-xs text-gray-500">Tourism Competitiveness Analysis Project</p>
+                <p class="text-sm text-gray-400 mb-2">&copy; 2025 Waterpark Wonderland Melaka E-Portfolio</p>
+                <p class="text-xs text-gray-500 mb-4">Tourism Competitiveness Analysis Project</p>
+                <a href="https://www.melakawonderland.com.my/bm/" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="inline-flex items-center px-6 py-2 border border-white/20 text-sm font-medium text-white hover:bg-white/10 rounded-full transition-colors">
+                    <i class="fas fa-external-link-alt mr-2"></i>
+                    Visit Official Website
+                </a>
             </div>
         </footer>
     </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- Mobile Menu Script -->
     <script>
@@ -949,6 +1219,260 @@
                 }
             });
         });
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scroll-progress').style.width = scrolled + '%';
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Scroll Animations using Intersection Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with fade-in classes
+        document.querySelectorAll('.fade-in-up, .fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax Effect
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallaxSection = document.querySelector('.parallax-section');
+            if (parallaxSection) {
+                const speed = scrolled * 0.3;
+                parallaxSection.style.transform = `translateY(${speed}px)`;
+            }
+        });
+
+        // Chart.js Visualization for Scores with Enhanced Gradients
+        const ctx = document.getElementById('scoreChart');
+        if (ctx) {
+            const scores = [80, 90, 80, 70, 80, 70, 80];
+            const labels = ['Accessibility', 'Facilities & Amenities', 'Safety & Security', 'Service Quality', 'Value for Money', 'Marketing & Promotion', 'Environmental Sustainability'];
+            
+            // Create enhanced gradients for each bar
+            function createGradient(chart, colors) {
+                const chartArea = chart.chartArea;
+                if (!chartArea) {
+                    return null;
+                }
+                
+                const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                
+                // Multi-stop gradient for enhanced effect
+                gradient.addColorStop(0, colors[0]); // Bottom - darker
+                gradient.addColorStop(0.3, colors[1]); // Mid-bottom
+                gradient.addColorStop(0.6, colors[2]); // Mid-top
+                gradient.addColorStop(1, colors[3]); // Top - lighter/brightest
+                
+                return gradient;
+            }
+            
+            // Blue to purple gradient color schemes
+            const colorSchemes = [
+                // Blue to purple gradient for 80%
+                ['rgba(59, 130, 246, 0.9)', 'rgba(99, 102, 241, 0.85)', 'rgba(139, 92, 246, 0.8)', 'rgba(167, 139, 250, 0.75)'],
+                // Brighter blue to purple for 90% (highest score)
+                ['rgba(96, 165, 250, 0.9)', 'rgba(129, 140, 248, 0.85)', 'rgba(167, 139, 250, 0.8)', 'rgba(196, 181, 253, 0.75)'],
+                // Deeper blue to purple for 70% (lower score)
+                ['rgba(37, 99, 235, 0.9)', 'rgba(79, 70, 229, 0.85)', 'rgba(124, 58, 237, 0.8)', 'rgba(139, 92, 246, 0.75)']
+            ];
+            
+            // Set initial colors first (blue to purple gradient base)
+            const initialColors = scores.map((value) => {
+                if (value === 90) return 'rgba(96, 165, 250, 0.9)'; // Bright blue
+                if (value === 70) return 'rgba(37, 99, 235, 0.9)'; // Deep blue
+                return 'rgba(59, 130, 246, 0.9)'; // Medium blue
+            });
+            
+            const initialBorderColors = scores.map((value) => {
+                if (value === 90) return 'rgba(167, 139, 250, 0.6)'; // Light purple
+                if (value === 70) return 'rgba(139, 92, 246, 0.5)'; // Medium purple
+                return 'rgba(139, 92, 246, 0.55)'; // Medium purple
+            });
+            
+            const scoreChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Score (%)',
+                        data: scores,
+                        backgroundColor: initialColors,
+                        borderColor: initialBorderColors,
+                        borderWidth: 1,
+                        borderRadius: {
+                            topLeft: 8,
+                            topRight: 8,
+                            bottomLeft: 4,
+                            bottomRight: 4
+                        },
+                        borderSkipped: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    layout: {
+                        padding: {
+                            left: 10,
+                            right: 10,
+                            top: 15,
+                            bottom: 10
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(30, 41, 59, 0.98)',
+                            titleColor: '#fff',
+                            bodyColor: '#e2e8f0',
+                            borderColor: 'rgba(148, 163, 184, 0.3)',
+                            borderWidth: 1,
+                            padding: 14,
+                            cornerRadius: 8,
+                            displayColors: true,
+                            titleFont: {
+                                size: 13,
+                                weight: '600'
+                            },
+                            bodyFont: {
+                                size: 14,
+                                weight: '500'
+                            },
+                            callbacks: {
+                                label: function(context) {
+                                    return 'Score: ' + context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                color: '#9ca3af',
+                                font: {
+                                    size: 12,
+                                    weight: '500'
+                                },
+                                stepSize: 20,
+                                padding: 10
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.08)',
+                                lineWidth: 1,
+                                drawBorder: false
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#9ca3af',
+                                font: {
+                                    size: 11,
+                                    weight: '500'
+                                },
+                                maxRotation: 45,
+                                minRotation: 45,
+                                padding: 12
+                            },
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeInOutQuart',
+                        delay: function(context) {
+                            return context.dataIndex * 100;
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    },
+                    onHover: (event, activeElements) => {
+                        ctx.canvas.style.cursor = activeElements.length > 0 ? 'pointer' : 'default';
+                    }
+                }
+            });
+            
+            // Initialize gradients after chart is created
+            function applyGradients() {
+                const chartArea = scoreChart.chartArea;
+                if (!chartArea || !chartArea.top || !chartArea.bottom) {
+                    setTimeout(applyGradients, 50);
+                    return;
+                }
+                
+                const dataset = scoreChart.data.datasets[0];
+                dataset.backgroundColor = scores.map((value) => {
+                    // All bars use blue to purple gradient
+                    let colors;
+                    if (value === 90) {
+                        colors = colorSchemes[1]; // Brighter blue to purple
+                    } else if (value === 70) {
+                        colors = colorSchemes[2]; // Deeper blue to purple
+                    } else {
+                        colors = colorSchemes[0]; // Standard blue to purple
+                    }
+                    const gradient = createGradient(scoreChart, colors);
+                    return gradient || colors[1]; // Fallback to solid color if gradient fails
+                });
+                
+                dataset.borderColor = initialBorderColors;
+                scoreChart.update('none');
+            }
+            
+            // Apply gradients after chart renders
+            setTimeout(applyGradients, 200);
+            
+            // Add hover effect enhancement
+            ctx.canvas.addEventListener('mousemove', function(event) {
+                const points = scoreChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, true);
+                if (points.length) {
+                    ctx.canvas.style.cursor = 'pointer';
+                } else {
+                    ctx.canvas.style.cursor = 'default';
+                }
+            });
+        }
     </script>
 </body>
 </html>
