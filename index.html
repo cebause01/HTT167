@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waterpark Wonderland Melaka - E-Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #8b5cf6;
+            --accent-pink: #ec4899;
+            --accent-blue: #06b6d4;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--primary);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+        
+        /* Floating orbs background */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-pink), transparent);
+            top: -200px;
+            right: -200px;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent), transparent);
+            bottom: -150px;
+            left: -150px;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+        
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--accent-blue), transparent);
+            top: 50%;
+            left: 50%;
+            animation: float 30s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+        
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .glass-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-number {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+        }
+        
+        .section-divider {
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-blue));
+            margin: 1.5rem auto;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-blue));
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .member-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .member-card:hover::before {
+            opacity: 1;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-pink));
+            border: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            border: 2px solid white;
+            background: transparent;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body class="smooth-scroll">
+    <!-- Floating orbs background -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    
+    <div class="content-wrapper">
+        <!-- Navigation -->
+        <nav class="fixed top-0 w-full glass-card z-50">
+            <div class="container mx-auto px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="text-lg font-semibold tracking-tight">
+                        Waterpark Wonderland
+                    </div>
+                    <div class="hidden md:flex space-x-8 text-sm font-medium">
+                        <a href="#home" class="nav-link text-gray-300 hover:text-white">Home</a>
+                        <a href="#group" class="nav-link text-gray-300 hover:text-white">Group</a>
+                        <a href="#overview" class="nav-link text-gray-300 hover:text-white">Overview</a>
+                        <a href="#visit" class="nav-link text-gray-300 hover:text-white">Visit</a>
+                        <a href="#media" class="nav-link text-gray-300 hover:text-white">Media</a>
+                        <a href="#score" class="nav-link text-gray-300 hover:text-white">Score</a>
+                        <a href="#analysis" class="nav-link text-gray-300 hover:text-white">Analysis</a>
+                        <a href="#recommendations" class="nav-link text-gray-300 hover:text-white">Recommendations</a>
+                    </div>
+                    <button class="md:hidden text-white" id="mobile-menu-btn">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+                <div class="hidden md:hidden mt-4 pb-4" id="mobile-menu">
+                    <div class="flex flex-col space-y-3 text-sm">
+                        <a href="#home" class="text-gray-300 hover:text-white transition-colors py-2">Home</a>
+                        <a href="#group" class="text-gray-300 hover:text-white transition-colors py-2">Group</a>
+                        <a href="#overview" class="text-gray-300 hover:text-white transition-colors py-2">Overview</a>
+                        <a href="#visit" class="text-gray-300 hover:text-white transition-colors py-2">Visit</a>
+                        <a href="#media" class="text-gray-300 hover:text-white transition-colors py-2">Media</a>
+                        <a href="#score" class="text-gray-300 hover:text-white transition-colors py-2">Score</a>
+                        <a href="#analysis" class="text-gray-300 hover:text-white transition-colors py-2">Analysis</a>
+                        <a href="#recommendations" class="text-gray-300 hover:text-white transition-colors py-2">Recommendations</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center justify-center px-6 pt-20">
+            <div class="container mx-auto max-w-5xl text-center">
+                <p class="section-number mb-4">Tourism Competitiveness Analysis</p>
+                <h1 class="text-6xl md:text-7xl font-light tracking-tight mb-6 leading-tight">
+                    Waterpark Wonderland<br>
+                    <span class="gradient-text">Melaka</span>
+                </h1>
+                <p class="text-xl text-gray-400 font-light mb-12 max-w-2xl mx-auto">
+                    An E-Portfolio presenting comprehensive analysis of tourism competitiveness
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#overview" class="btn-primary px-8 py-3 text-sm font-medium rounded-full text-white">
+                        View Analysis
+                    </a>
+                    <a href="#group" class="btn-secondary px-8 py-3 text-sm font-medium rounded-full text-white">
+                        Our Team
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Group Details Section -->
+        <section id="group" class="py-24 px-6">
+            <div class="container mx-auto max-w-6xl">
+                <p class="section-number text-center mb-2">01</p>
+                <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Group Details</h2>
+                <div class="section-divider"></div>
+                
+                <div class="glass-card rounded-2xl p-12">
+                    <h3 class="text-2xl font-light text-center mb-12 text-gray-300">Our Team</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+                        <div class="member-card glass-card rounded-xl p-6 text-center border border-white/10">
+                            <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-2xl font-semibold">1</span>
+                            </div>
+                            <p class="text-sm font-medium mb-1">Member 1</p>
+                            <p class="text-xs text-gray-400">[Name]</p>
+                            <p class="text-xs text-gray-500 mt-1">[Student ID]</p>
+                        </div>
+                        <div class="member-card glass-card rounded-xl p-6 text-center border border-white/10">
+                            <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-2xl font-semibold">2</span>
+                            </div>
+                            <p class="text-sm font-medium mb-1">Member 2</p>
+                            <p class="text-xs text-gray-400">[Name]</p>
+                            <p class="text-xs text-gray-500 mt-1">[Student ID]</p>
+                        </div>
+                        <div class="member-card glass-card rounded-xl p-6 text-center border border-white/10">
+                            <div class="w-20 h-20 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-2xl font-semibold">3</span>
+                            </div>
+                            <p class="text-sm font-medium mb-1">Member 3</p>
+                            <p class="text-xs text-gray-400">[Name]</p>
+                            <p class="text-xs text-gray-500 mt-1">[Student ID]</p>
+                        </div>
+                        <div class="member-card glass-card rounded-xl p-6 text-center border border-white/10">
+                            <div class="w-20 h-20 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-2xl font-semibold">4</span>
+                            </div>
+                            <p class="text-sm font-medium mb-1">Member 4</p>
+                            <p class="text-xs text-gray-400">[Name]</p>
+                            <p class="text-xs text-gray-500 mt-1">[Student ID]</p>
+                        </div>
+                        <div class="member-card glass-card rounded-xl p-6 text-center border border-white/10 col-span-2 md:col-span-1">
+                            <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-2xl font-semibold">5</span>
+                            </div>
+                            <p class="text-sm font-medium mb-1">Member 5</p>
+                            <p class="text-xs text-gray-400">[Name]</p>
+                            <p class="text-xs text-gray-500 mt-1">[Student ID]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview Section -->
+        <section id="overview" class="py-24 px-6">
+            <div class="container mx-auto max-w-6xl">
+                <p class="section-number text-center mb-2">02</p>
+                <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Attraction Overview</h2>
+                <div class="section-divider"></div>
+                
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <div class="glass-card rounded-xl p-8 border border-white/10">
+                        <h3 class="text-xl font-medium mb-4">Location</h3>
+                        <p class="text-gray-400 leading-relaxed text-sm">
+                            Waterpark Wonderland Melaka is located in the historic city of Melaka, Malaysia. 
+                            Situated in a prime location accessible from major highways, the waterpark offers 
+                            easy access for both local and international visitors. The strategic location 
+                            combines the charm of historical Melaka with modern entertainment facilities.
+                        </p>
+                    </div>
+                    <div class="glass-card rounded-xl p-8 border border-white/10">
+                        <h3 class="text-xl font-medium mb-4">History</h3>
+                        <p class="text-gray-400 leading-relaxed text-sm">
+                            Established as one of Melaka's premier family entertainment destinations, 
+                            Waterpark Wonderland has been serving visitors for several years. The park 
+                            was developed to complement Melaka's growing tourism industry, providing 
+                            a modern recreational facility that appeals to families and adventure seekers 
+                            visiting the UNESCO World Heritage city.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Embedded Map -->
+                <div class="glass-card rounded-xl p-0 border border-white/10 overflow-hidden mb-12">
+                    <div class="h-96 w-full">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.657416730419!2d102.29444319999999!3d2.2808429!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d1e50f3ebee64d%3A0x29592496d614ccdf!2sMelaka%20Wonderland%20Theme%20Park%20%26%20Resort!5e0!3m2!1sen!2smy!4v1763054769379!5m2!1sen!2smy" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0; filter: grayscale(20%) invert(10%);" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="p-6 border-t border-white/10">
+                        <h3 class="text-xl font-medium mb-2">Location Map</h3>
+                        <p class="text-sm text-gray-400">Melaka Wonderland Theme Park & Resort, Melaka, Malaysia</p>
+                    </div>
+                </div>
+                
+                <div class="glass-card rounded-xl p-8 border border-white/10">
+                    <h3 class="text-xl font-medium mb-8 text-center">Key Features</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center py-6 border-b md:border-b-0 md:border-r border-white/10">
+                            <p class="text-sm font-medium mb-2">Water Slides</p>
+                            <p class="text-xs text-gray-400">Thrilling water slides for all ages</p>
+                        </div>
+                        <div class="text-center py-6 border-b md:border-b-0 md:border-r border-white/10">
+                            <p class="text-sm font-medium mb-2">Wave Pool</p>
+                            <p class="text-xs text-gray-400">Experience artificial waves</p>
+                        </div>
+                        <div class="text-center py-6 border-b md:border-b-0 border-white/10">
+                            <p class="text-sm font-medium mb-2">Kids Zone</p>
+                            <p class="text-xs text-gray-400">Safe play area for children</p>
+                        </div>
+                        <div class="text-center py-6 md:border-r border-white/10">
+                            <p class="text-sm font-medium mb-2">Food Court</p>
+                            <p class="text-xs text-gray-400">Variety of dining options</p>
+                        </div>
+                        <div class="text-center py-6 md:border-r border-white/10">
+                            <p class="text-sm font-medium mb-2">Locker Facilities</p>
+                            <p class="text-xs text-gray-400">Secure storage for belongings</p>
+                        </div>
+                        <div class="text-center py-6">
+                            <p class="text-sm font-medium mb-2">Parking</p>
+                            <p class="text-xs text-gray-400">Ample parking space available</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Site Visit Plan Section -->
+        <section id="visit" class="py-24 px-6">
+            <div class="container mx-auto max-w-6xl">
+                <p class="section-number text-center mb-2">03</p>
+                <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Site Visit Plan</h2>
+                <div class="section-divider"></div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="glass-card rounded-xl p-8 border border-purple-500/30 bg-gradient-to-br from-purple-500/10 to-transparent">
+                        <h3 class="text-xl font-medium mb-6">Group Preparation</h3>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-start">
+                                <span class="mr-3 text-purple-400 mt-1">•</span>
+                                <span>Research on waterpark facilities</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-purple-400 mt-1">•</span>
+                                <span>Review competitiveness indicators</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-purple-400 mt-1">•</span>
+                                <span>Prepare observation checklist</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-purple-400 mt-1">•</span>
+                                <span>Coordinate visit schedule</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-purple-400 mt-1">•</span>
+                                <span>Assign roles and responsibilities</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="glass-card rounded-xl p-8 border border-white/10">
+                        <h3 class="text-xl font-medium mb-6">Group Strategies</h3>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Divide into observation teams</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Systematic data collection approach</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Photo and video documentation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Visitor interaction for feedback</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Real-time note-taking</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="glass-card rounded-xl p-8 border border-white/10">
+                        <h3 class="text-xl font-medium mb-6">Overall Experience</h3>
+                        <p class="text-sm text-gray-300 leading-relaxed mb-4">
+                            Our site visit to Waterpark Wonderland Melaka provided valuable insights into 
+                            the operational aspects, visitor experience, and overall competitiveness of 
+                            the attraction. We observed various facilities, services, and management 
+                            practices that contribute to the park's appeal and areas for potential improvement.
+                        </p>
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            The visit enabled us to gather first-hand data and observations that form the 
+                            basis of our competitiveness analysis.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Media Section -->
+        <section id="media" class="py-24 px-6">
+            <div class="container mx-auto max-w-6xl">
+                <p class="section-number text-center mb-2">04</p>
+                <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Visual & Multimedia Materials</h2>
+                <div class="section-divider"></div>
+                
+                <div class="mb-12">
+                    <h3 class="text-xl font-medium mb-6">Photos</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="glass-card border border-white/10 overflow-hidden rounded-xl">
+                            <div class="h-64 bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                                <i class="fas fa-image text-gray-500 text-4xl"></i>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm font-medium">Waterpark Entrance</p>
+                            </div>
+                        </div>
+                        <div class="glass-card border border-white/10 overflow-hidden rounded-xl">
+                            <div class="h-64 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center">
+                                <i class="fas fa-image text-gray-500 text-4xl"></i>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm font-medium">Water Slides</p>
+                            </div>
+                        </div>
+                        <div class="glass-card border border-white/10 overflow-hidden rounded-xl">
+                            <div class="h-64 bg-gradient-to-br from-pink-500/20 to-purple-500/20 flex items-center justify-center">
+                                <i class="fas fa-image text-gray-500 text-4xl"></i>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm font-medium">Facilities</p>
+                            </div>
+                        </div>
+                        <div class="glass-card border border-white/10 overflow-hidden rounded-xl">
+                            <div class="h-64 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center">
+                                <i class="fas fa-image text-gray-500 text-4xl"></i>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm font-medium">Food Court</p>
+                            </div>
+                        </div>
+                        <div class="glass-card border border-white/10 overflow-hidden rounded-xl">
+                            <div class="h-64 bg-gradient-to-br from-purple-500/20 to-cyan-500/20 flex items-center justify-center">
+                                <i class="fas fa-image text-gray-500 text-4xl"></i>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm font-medium">Kids Zone</p>
+                            </div>
+                        </div>
+                        <div class="glass-card border border-white/10 overflow-hidden rounded-xl">
+                            <div class="h-64 bg-gradient-to-br from-pink-500/20 to-blue-500/20 flex items-center justify-center">
+                                <i class="fas fa-image text-gray-500 text-4xl"></i>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm font-medium">Parking Area</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-12">
+                    <h3 class="text-xl font-medium mb-6">Videos</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="glass-card border border-white/10 overflow-hidden rounded-xl">
+                            <div class="h-64 bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                                <i class="fas fa-play text-gray-400 text-6xl"></i>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm font-medium">Site Visit Documentation</p>
+                            </div>
+                        </div>
+                        <div class="glass-card border border-white/10 overflow-hidden rounded-xl">
+                            <div class="h-64 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center">
+                                <i class="fas fa-play text-gray-400 text-6xl"></i>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm font-medium">Facility Tour</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-medium mb-6">Audio Recordings</h3>
+                    <div class="glass-card border border-white/10 p-8 rounded-xl">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-headphones text-purple-300"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium">Visitor Interview 1</p>
+                                        <p class="text-xs text-gray-400">Feedback from family visitors</p>
+                                    </div>
+                                </div>
+                                <button class="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-medium rounded-full hover:opacity-90 transition-opacity">
+                                    Play
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-headphones text-cyan-300"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium">Staff Interview</p>
+                                        <p class="text-xs text-gray-400">Insights from park management</p>
+                                    </div>
+                                </div>
+                                <button class="px-6 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-xs font-medium rounded-full hover:opacity-90 transition-opacity">
+                                    Play
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Competitiveness Score Section -->
+        <section id="score" class="py-24 px-6">
+            <div class="container mx-auto max-w-6xl">
+                <p class="section-number text-center mb-2">05</p>
+                <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Competitiveness Score</h2>
+                <div class="section-divider"></div>
+                
+                <div class="glass-card border border-white/10 p-12 mb-8 text-center rounded-xl">
+                    <p class="text-sm text-gray-400 mb-4 uppercase tracking-wider">Overall Score</p>
+                    <p class="text-7xl font-light mb-2 gradient-text">85<span class="text-4xl">%</span></p>
+                    <p class="text-sm text-gray-400">Competitiveness Rating</p>
+                </div>
+
+                <div class="glass-card border border-white/10 rounded-xl overflow-hidden">
+                    <div class="p-8 border-b border-white/10">
+                        <h3 class="text-xl font-medium">Analysis Sheet Scores</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-white/10">
+                                    <th class="px-8 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Indicator</th>
+                                    <th class="px-8 py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider">Score</th>
+                                    <th class="px-8 py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider">Max Score</th>
+                                    <th class="px-8 py-4 text-center text-xs font-medium text-gray-400 uppercase tracking-wider">Percentage</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-white/10">
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-8 py-4 text-sm">Accessibility</td>
+                                    <td class="px-8 py-4 text-center text-sm font-medium">8</td>
+                                    <td class="px-8 py-4 text-center text-sm text-gray-400">10</td>
+                                    <td class="px-8 py-4 text-center">
+                                        <span class="inline-block px-3 py-1 text-xs font-medium bg-purple-500/20 text-purple-300 rounded-full">80%</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-8 py-4 text-sm">Facilities & Amenities</td>
+                                    <td class="px-8 py-4 text-center text-sm font-medium">9</td>
+                                    <td class="px-8 py-4 text-center text-sm text-gray-400">10</td>
+                                    <td class="px-8 py-4 text-center">
+                                        <span class="inline-block px-3 py-1 text-xs font-medium bg-cyan-500/20 text-cyan-300 rounded-full">90%</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-8 py-4 text-sm">Safety & Security</td>
+                                    <td class="px-8 py-4 text-center text-sm font-medium">8</td>
+                                    <td class="px-8 py-4 text-center text-sm text-gray-400">10</td>
+                                    <td class="px-8 py-4 text-center">
+                                        <span class="inline-block px-3 py-1 text-xs font-medium bg-purple-500/20 text-purple-300 rounded-full">80%</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-8 py-4 text-sm">Service Quality</td>
+                                    <td class="px-8 py-4 text-center text-sm font-medium">7</td>
+                                    <td class="px-8 py-4 text-center text-sm text-gray-400">10</td>
+                                    <td class="px-8 py-4 text-center">
+                                        <span class="inline-block px-3 py-1 text-xs font-medium bg-pink-500/20 text-pink-300 rounded-full">70%</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-8 py-4 text-sm">Value for Money</td>
+                                    <td class="px-8 py-4 text-center text-sm font-medium">8</td>
+                                    <td class="px-8 py-4 text-center text-sm text-gray-400">10</td>
+                                    <td class="px-8 py-4 text-center">
+                                        <span class="inline-block px-3 py-1 text-xs font-medium bg-purple-500/20 text-purple-300 rounded-full">80%</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-8 py-4 text-sm">Marketing & Promotion</td>
+                                    <td class="px-8 py-4 text-center text-sm font-medium">7</td>
+                                    <td class="px-8 py-4 text-center text-sm text-gray-400">10</td>
+                                    <td class="px-8 py-4 text-center">
+                                        <span class="inline-block px-3 py-1 text-xs font-medium bg-pink-500/20 text-pink-300 rounded-full">70%</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-8 py-4 text-sm">Environmental Sustainability</td>
+                                    <td class="px-8 py-4 text-center text-sm font-medium">8</td>
+                                    <td class="px-8 py-4 text-center text-sm text-gray-400">10</td>
+                                    <td class="px-8 py-4 text-center">
+                                        <span class="inline-block px-3 py-1 text-xs font-medium bg-purple-500/20 text-purple-300 rounded-full">80%</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Competitiveness Analysis Summary -->
+        <section id="analysis" class="py-24 px-6">
+            <div class="container mx-auto max-w-4xl">
+                <p class="section-number text-center mb-2">06</p>
+                <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Competitiveness Analysis Summary</h2>
+                <div class="section-divider"></div>
+                
+                <div class="glass-card border border-white/10 p-12 rounded-xl">
+                    <h3 class="text-2xl font-light mb-6">Executive Summary</h3>
+                    <p class="text-gray-300 leading-relaxed mb-6 text-sm">
+                        Waterpark Wonderland Melaka demonstrates a strong competitive position in the 
+                        regional tourism market, achieving an overall competitiveness score of 85%. 
+                        The analysis reveals several key strengths and areas for improvement based on 
+                        comprehensive on-site observations and data collection.
+                    </p>
+                    
+                    <h4 class="text-xl font-medium mt-8 mb-4">Key Strengths</h4>
+                    <ul class="space-y-2 mb-8 text-gray-300 text-sm">
+                        <li class="flex items-start">
+                            <span class="mr-3 text-purple-400 mt-1">•</span>
+                            <span>Excellent facilities and amenities with modern water attractions</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-3 text-purple-400 mt-1">•</span>
+                            <span>Good accessibility with convenient location and parking facilities</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-3 text-purple-400 mt-1">•</span>
+                            <span>Strong safety measures and security protocols in place</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-3 text-purple-400 mt-1">•</span>
+                            <span>Reasonable pricing structure offering good value for money</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-3 text-purple-400 mt-1">•</span>
+                            <span>Environmental consciousness with sustainable practices</span>
+                        </li>
+                    </ul>
+                    
+                    <h4 class="text-xl font-medium mt-8 mb-4">Areas of Concern</h4>
+                    <ul class="space-y-2 mb-8 text-gray-300 text-sm">
+                        <li class="flex items-start">
+                            <span class="mr-3 text-pink-400 mt-1">•</span>
+                            <span>Service quality shows room for improvement in staff training and responsiveness</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-3 text-pink-400 mt-1">•</span>
+                            <span>Marketing and promotion efforts could be enhanced to reach wider audiences</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-3 text-pink-400 mt-1">•</span>
+                            <span>Some facilities may require maintenance and modernization</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-3 text-pink-400 mt-1">•</span>
+                            <span>Visitor information and signage could be more comprehensive</span>
+                        </li>
+                    </ul>
+                    
+                    <h4 class="text-xl font-medium mt-8 mb-4">Observations from Site Visit</h4>
+                    <p class="text-gray-300 leading-relaxed mb-4 text-sm">
+                        During our site visit, we observed that the waterpark maintains a clean and 
+                        well-organized environment. The facilities are generally well-maintained, 
+                        with clear safety protocols visible throughout the park. Visitor flow was 
+                        managed effectively, though peak hours showed some congestion at popular 
+                        attractions. Staff presence was adequate, though response times to visitor 
+                        inquiries varied.
+                    </p>
+                    <p class="text-gray-300 leading-relaxed text-sm">
+                        The park's location provides good accessibility, with adequate parking and 
+                        proximity to other tourist attractions in Melaka. However, digital presence 
+                        and online booking systems could be improved to enhance visitor convenience. 
+                        Overall, Waterpark Wonderland Melaka presents a solid foundation for 
+                        competitiveness with strategic improvements needed in specific areas.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommendations Section -->
+        <section id="recommendations" class="py-24 px-6">
+            <div class="container mx-auto max-w-6xl">
+                <p class="section-number text-center mb-2">07</p>
+                <h2 class="text-4xl md:text-5xl font-light text-center mb-4">Recommendations for Improvement</h2>
+                <div class="section-divider"></div>
+                
+                <div class="space-y-4">
+                    <div class="glass-card border-l-4 border-cyan-400 p-8 rounded-xl border border-white/10">
+                        <h3 class="text-xl font-medium mb-4">Accessibility <span class="text-sm font-normal text-gray-400">(Score: 80%)</span></h3>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Enhance public transportation connectivity with shuttle services from major hotels</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Improve signage on main roads leading to the waterpark</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Consider partnerships with ride-sharing services for visitor convenience</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Expand parking capacity during peak seasons</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card border-l-4 border-purple-400 p-8 rounded-xl border border-white/10">
+                        <h3 class="text-xl font-medium mb-4">Facilities & Amenities <span class="text-sm font-normal text-gray-400">(Score: 90%)</span></h3>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start">
+                                <span class="mr-3 text-purple-400 mt-1">•</span>
+                                <span>Regular maintenance schedule for all water attractions</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-purple-400 mt-1">•</span>
+                                <span>Add more shaded areas and rest zones throughout the park</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-purple-400 mt-1">•</span>
+                                <span>Enhance locker facilities with digital access systems</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-purple-400 mt-1">•</span>
+                                <span>Consider adding VIP areas or premium experiences</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card border-l-4 border-cyan-400 p-8 rounded-xl border border-white/10">
+                        <h3 class="text-xl font-medium mb-4">Safety & Security <span class="text-sm font-normal text-gray-400">(Score: 80%)</span></h3>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Increase lifeguard presence and visibility at all water areas</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Implement regular safety drills and training programs</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Enhance first aid facilities and medical response capabilities</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Improve CCTV coverage and monitoring systems</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card border-l-4 border-pink-400 p-8 rounded-xl border border-white/10">
+                        <h3 class="text-xl font-medium mb-4">Service Quality <span class="text-sm font-normal text-gray-400">(Score: 70%)</span></h3>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start">
+                                <span class="mr-3 text-pink-400 mt-1">•</span>
+                                <span>Implement comprehensive staff training programs focusing on customer service</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-pink-400 mt-1">•</span>
+                                <span>Establish clear service standards and performance metrics</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-pink-400 mt-1">•</span>
+                                <span>Introduce visitor feedback systems for continuous improvement</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-pink-400 mt-1">•</span>
+                                <span>Reduce waiting times at ticket counters and food outlets</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-pink-400 mt-1">•</span>
+                                <span>Train staff in multiple languages to serve international visitors</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card border-l-4 border-purple-400 p-8 rounded-xl border border-white/10">
+                        <h3 class="text-xl font-medium mb-4">Value for Money <span class="text-sm font-normal text-gray-400">(Score: 80%)</span></h3>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start">
+                                <span class="mr-3 text-purple-400 mt-1">•</span>
+                                <span>Introduce flexible pricing packages for different visitor segments</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-purple-400 mt-1">•</span>
+                                <span>Offer family packages and group discounts</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-purple-400 mt-1">•</span>
+                                <span>Enhance food and beverage value propositions</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-purple-400 mt-1">•</span>
+                                <span>Consider annual pass options for local residents</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card border-l-4 border-pink-400 p-8 rounded-xl border border-white/10">
+                        <h3 class="text-xl font-medium mb-4">Marketing & Promotion <span class="text-sm font-normal text-gray-400">(Score: 70%)</span></h3>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start">
+                                <span class="mr-3 text-pink-400 mt-1">•</span>
+                                <span>Develop a comprehensive digital marketing strategy including social media</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-pink-400 mt-1">•</span>
+                                <span>Create engaging content showcasing unique attractions and experiences</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-pink-400 mt-1">•</span>
+                                <span>Partner with travel agencies and tour operators</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-pink-400 mt-1">•</span>
+                                <span>Implement online booking system with promotional offers</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-pink-400 mt-1">•</span>
+                                <span>Participate in tourism fairs and exhibitions</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card border-l-4 border-cyan-400 p-8 rounded-xl border border-white/10">
+                        <h3 class="text-xl font-medium mb-4">Environmental Sustainability <span class="text-sm font-normal text-gray-400">(Score: 80%)</span></h3>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Implement water recycling and conservation systems</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Reduce plastic usage and promote eco-friendly alternatives</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Enhance waste management and recycling programs</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Consider solar energy installations for power needs</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 text-cyan-400 mt-1">•</span>
+                                <span>Develop educational programs on environmental conservation</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-white/10 py-12 px-6">
+            <div class="container mx-auto text-center">
+                <p class="text-sm text-gray-400 mb-2">&copy; 2024 Waterpark Wonderland Melaka E-Portfolio</p>
+                <p class="text-xs text-gray-500">Tourism Competitiveness Analysis Project</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
