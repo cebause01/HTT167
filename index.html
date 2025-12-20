@@ -156,6 +156,7 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
         
+        
         /* Interactive elements with better touch targets */
         button, a, [role="button"] {
             min-height: 44px;
@@ -227,7 +228,7 @@
         
         .member-card:hover {
             transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.3) !important;
         }
         
         .member-card:hover::before {
@@ -274,7 +275,7 @@
         
         .btn-primary:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.5);
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.5) !important;
         }
         
         .btn-primary:active {
@@ -283,39 +284,32 @@
         }
         
         .btn-secondary {
-            border: 2px solid black;
+            border: 2px solid rgba(255, 255, 255, 0.3);
             background: transparent;
             min-height: 44px;
             min-width: 44px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            overflow: hidden;
+            color: white;
+            z-index: 1;
         }
         
-        .btn-secondary::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: black;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.4s, height 0.4s;
-            z-index: -1;
-        }
-        
-        .btn-secondary:hover::before {
-            width: 300px;
-            height: 300px;
+        .btn-secondary * {
+            position: relative;
+            z-index: 1;
+            color: inherit;
         }
         
         .btn-secondary:hover {
-            background: black;
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.1);
             color: white;
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-secondary:hover * {
+            color: white;
         }
         
         .btn-secondary:active {
@@ -368,7 +362,7 @@
             transform: translateY(20px);
             transition: all 0.3s ease;
             z-index: 1000;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4) !important;
         }
         
         @media (max-width: 768px) {
@@ -389,7 +383,7 @@
         
         #back-to-top:hover {
             transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.7);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.7) !important;
             background: linear-gradient(135deg, var(--accent-light), var(--accent));
         }
         
@@ -410,7 +404,7 @@
             animation: gradient-shift 3s ease infinite;
             z-index: 9999;
             transition: width 0.1s ease;
-            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.5);
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.5) !important;
         }
         
         @keyframes gradient-shift {
@@ -538,6 +532,27 @@
         }
         
         [data-theme="light"] .nav-link:hover {
+            color: var(--text-primary);
+        }
+        
+        /* Light mode button styles */
+        [data-theme="light"] .btn-secondary {
+            border: 2px solid rgba(15, 23, 42, 0.3);
+            color: var(--text-primary);
+            background: transparent;
+        }
+        
+        [data-theme="light"] .btn-secondary * {
+            color: var(--text-primary);
+        }
+        
+        [data-theme="light"] .btn-secondary:hover {
+            border-color: rgba(15, 23, 42, 0.6);
+            background: rgba(15, 23, 42, 0.1);
+            color: var(--text-primary);
+        }
+        
+        [data-theme="light"] .btn-secondary:hover * {
             color: var(--text-primary);
         }
         
@@ -792,43 +807,43 @@
                     <h3 class="text-xl md:text-2xl font-light text-center mb-6 md:mb-12 text-gray-300">Our Team</h3>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                         <div class="member-card glass-card rounded-xl p-6 text-center border border-white/20">
-                            <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                                <span class="text-2xl font-semibold">Z</span>
+                            <div class="w-24 h-26 rounded-lg mx-auto mb-4 overflow-hidden border-2 border-white/20">
+                                <img src="photos/Zuhairah.png" alt="ZUHAIRAH BINTI ZULKEPLY" class="w-full h-full object-cover object-center">
                             </div>
                             <p class="text-sm font-medium mb-1">ZUHAIRAH BINTI ZULKEPLY</p>
                             <p class="text-xs text-gray-400 mt-1">2025872458</p>
                         </div>
                         <div class="member-card glass-card rounded-xl p-6 text-center border border-white/20">
-                            <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                                <span class="text-2xl font-semibold">N</span>
+                            <div class="w-24 h-26 rounded-lg mx-auto mb-4 overflow-hidden border-2 border-white/20">
+                                <img src="photos/Saidatul.png" alt="NURUL SAIDATUL BALQIS BINTI AZHAR" class="w-full h-full object-cover object-center">
                             </div>
                             <p class="text-sm font-medium mb-1">NURUL SAIDATUL BALQIS BINTI AZHAR</p>
                             <p class="text-xs text-gray-400 mt-1">2025855008</p>
                         </div>
                         <div class="member-card glass-card rounded-xl p-6 text-center border border-white/20">
-                            <div class="w-20 h-20 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                                <span class="text-2xl font-semibold">S</span>
+                            <div class="w-24 h-26 rounded-lg mx-auto mb-4 overflow-hidden border-2 border-white/20">
+                                <img src="photos/Shakirah.png" alt="SITI SYAKIRAH BINTI MOHD SALLEH" class="w-full h-full object-cover object-center">
                             </div>
                             <p class="text-sm font-medium mb-1">SITI SYAKIRAH BINTI MOHD SALLEH</p>
                             <p class="text-xs text-gray-400 mt-1">2025819116</p>
                         </div>
                         <div class="member-card glass-card rounded-xl p-6 text-center border border-white/20">
-                            <div class="w-20 h-20 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                                <span class="text-2xl font-semibold">N</span>
+                            <div class="w-24 h-26 rounded-lg mx-auto mb-4 overflow-hidden border-2 border-white/20">
+                                <img src="photos/Alya.png" alt="NUR ALYA NABILAH BINTI NORHISHAM" class="w-full h-full object-cover object-center">
                             </div>
                             <p class="text-sm font-medium mb-1">NUR ALYA NABILAH BINTI NORHISHAM</p>
                             <p class="text-xs text-gray-400 mt-1">2025857998</p>
                         </div>
                         <div class="member-card glass-card rounded-xl p-6 text-center border border-white/20">
-                            <div class="w-20 h-20 bg-gradient-to-br from-blue-600 to-cyan-400 rounded-full mx-auto mb-4 flex items-center justify-center">
-                                <span class="text-2xl font-semibold">L</span>
+                            <div class="w-24 h-26 rounded-lg mx-auto mb-4 overflow-hidden border-2 border-white/20">
+                                <img src="photos/Hakim.png" alt="LUQMAN AL-HAKIM BIN ZULKEFLEE" class="w-full h-full object-cover object-center">
                             </div>
                             <p class="text-sm font-medium mb-1">LUQMAN AL-HAKIM BIN ZULKEFLEE</p>
                             <p class="text-xs text-gray-400 mt-1">2025402788</p>
                         </div>
                         <div class="member-card glass-card rounded-xl p-6 text-center border border-white/20">
-                            <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                                <span class="text-2xl font-semibold">A</span>
+                            <div class="w-24 h-26 rounded-lg mx-auto mb-4 overflow-hidden border-2 border-white/20">
+                                <img src="photos/Aqil.png" alt="AQIL FIQRIE BIN MOHD FAUZI" class="w-full h-full object-cover object-center">
                             </div>
                             <p class="text-sm font-medium mb-1">AQIL FIQRIE BIN MOHD FAUZI</p>
                             <p class="text-xs text-gray-400 mt-1">2025857998</p>
@@ -876,12 +891,12 @@
                 
                 <!-- Embedded Map -->
                 <div class="glass-card rounded-xl p-0 border border-white/20 overflow-hidden mb-8 md:mb-12">
-                    <div class="h-64 md:h-96 w-full">
+                    <div class="h-64 md:h-96 w-full map-container">
                         <iframe 
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.239498391521!2d102.2127142!3d2.4269654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31ce0236fe1b1d4d%3A0xf8491004587e0128!2sA%27Famosa%20Water%20Theme%20Park%20(Water%20World)!5e0!3m2!1sen!2smy!4v1763707051263!5m2!1sen!2smy" 
                             width="100%" 
                             height="100%" 
-                            style="border:0; filter: grayscale(20%) invert(10%);" 
+                            style="border:0;" 
                             allowfullscreen="" 
                             loading="lazy" 
                             referrerpolicy="no-referrer-when-downgrade">
@@ -933,7 +948,7 @@
                 <div class="section-divider"></div>
                 
                 <div class="grid md:grid-cols-3 gap-6 md:gap-8">
-                    <div class="glass-card rounded-xl p-4 md:p-8 border border-blue-500/30 bg-gradient-to-br from-blue-500/10 to-transparent">
+                    <div class="glass-card rounded-xl p-4 md:p-8 border border-white/20">
                         <h3 class="text-lg md:text-xl font-medium mb-4 md:mb-6">Group Preparation</h3>
                         <ul class="space-y-3 text-xs md:text-sm text-gray-300">
                             <li class="flex items-start">
@@ -1901,6 +1916,7 @@
         modalImage.addEventListener('click', (e) => e.stopPropagation());
         modalPrev.addEventListener('click', (e) => e.stopPropagation());
         modalNext.addEventListener('click', (e) => e.stopPropagation());
+        
     </script>
 </body>
 </html>
